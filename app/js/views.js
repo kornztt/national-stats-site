@@ -22,8 +22,8 @@ function kpiCard(label, value, sub, note) {
 
 function viewOverview() {
   var g = STATS.gdp, p = STATS.population, t = STATS.trade, inc = STATS.income;
-  var line = lineChart(g.series.map(function (d) { return { x: String(d.y), v: d.v }; }), { w: 560, h: 250, unit: "万亿元", color: "#c8402a" });
-  var donut = donutChart(g.industries.map(function (d) { return { name: d.name, share: d.share }; }), { size: 200, thick: 32, centerTop: "134.91", centerBottom: "万亿元 GDP" });
+  var line = lineChart(g.series.map(function (d) { return { x: String(d.y), v: d.v }; }), { w: 560, h: 220, unit: "万亿元", color: "#c8402a" });
+  var donut = donutChart(g.industries.map(function (d) { return { name: d.name, share: d.share }; }), { size: 165, thick: 30, centerTop: "134.91", centerBottom: "万亿元 GDP" });
   var regionBars = barChart(STATS.regions.areas.map(function (d) { return { x: d.name.replace("地区", ""), v: d.value }; }), { w: 560, h: 210, unit: "万亿元", colors: ["#1f4e79", "#2a7f6f", "#c9a227", "#7a5c9e"] });
   return '' +
   '<section class="hero"><h1>2024 年中国经济社会发展关键数字</h1>' +
@@ -211,7 +211,7 @@ function renderProvinceTable() {
 
 function viewRegions() {
   var r = STATS.regions;
-  var areaBars = barChart(r.areas.map(function (d) { return { x: d.name.replace("地区", ""), v: d.value }; }), { w: 560, h: 230, unit: "万亿元", colors: ["#1f4e79", "#2a7f6f", "#c9a227", "#7a5c9e"] });
+  var areaBars = barChart(r.areas.map(function (d) { return { x: d.name.replace("地区", ""), v: d.value }; }), { w: 560, h: 195, unit: "万亿元", colors: ["#1f4e79", "#2a7f6f", "#c9a227", "#7a5c9e"] });
   return '' +
   '<section class="page-head"><h1>地区对比 · 省域经济</h1><p>2024 年东部地区生产总值 70.24 万亿元，中部 28.72 万亿元，西部 28.74 万亿元，东北 6.35 万亿元。</p></section>' +
   '<div class="card"><h2>四大地区生产总值 · 2024 年</h2>' + areaBars +

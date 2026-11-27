@@ -68,7 +68,7 @@ main { padding: 20px 0 8px; }
 .legend-item i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
 
 .mini-table, .data-table { width: 100%; border-collapse: collapse; font-size: 14px; margin-top: 12px; }
-.mini-table th, .mini-table td, .data-table th, .data-table td { padding: 7px 8px; border-bottom: 1px solid var(--line); text-align: left; }
+.mini-table th, .mini-table td, .data-table th, .data-table td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: left; }
 .mini-table th, .data-table th { color: var(--muted); font-weight: 600; font-size: 13px; }
 .data-table tbody tr:nth-child(even) { background: #faf8f3; }
 
