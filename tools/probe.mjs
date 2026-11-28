@@ -2,7 +2,7 @@
 // 用法：xvfb-run -a -s "-screen 0 1280x720x24" node tools/probe.mjs
 import { firefox } from "/home/hatch/workspace/pw-test/node_modules/playwright/index.mjs";
 
-const BASE = "http://127.0.0.1:8123/index.html";
+const BASE = "http://127.0.0.1:" + (process.env.NAT_PORT || 8123) + "/index.html";
 let pass = 0, fail = 0;
 function check(name, ok, extra) {
   if (ok) { pass++; console.log("PASS " + name); }
@@ -96,7 +96,7 @@ try {
   page.on("request", (r) => reqs.push(r.url()));
   await page.goto(BASE + "#/trade", { waitUntil: "networkidle" });
   await page.waitForTimeout(500);
-  check("no external requests", reqs.every((u) => u.startsWith("http://127.0.0.1:8123/")));
+  check("no external requests", reqs.every((u) => u.startsWith(BASE.replace("/index.html", "/"))), reqs.filter((u) => !u.startsWith(BASE.replace("/index.html", "/"))).slice(0, 3).join(", "));
   await page.close();
 
   // phone viewport

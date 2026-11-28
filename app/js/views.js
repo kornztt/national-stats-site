@@ -22,12 +22,17 @@ function kpiCard(label, value, sub, note) {
 
 function viewOverview() {
   var g = STATS.gdp, p = STATS.population, t = STATS.trade, inc = STATS.income;
-  var line = lineChart(g.series.map(function (d) { return { x: String(d.y), v: d.v }; }), { w: 560, h: 220, unit: "万亿元", color: "#c8402a" });
+  var line = lineChart(g.series.map(function (d) { return { x: String(d.y), v: d.v }; }), { w: 1080, h: 240, unit: "万亿元", color: "#c8402a" });
   var donut = donutChart(g.industries.map(function (d) { return { name: d.name, share: d.share }; }), { size: 165, thick: 30, centerTop: "134.91", centerBottom: "万亿元 GDP" });
   var regionBars = barChart(STATS.regions.areas.map(function (d) { return { x: d.name.replace("地区", ""), v: d.value }; }), { w: 560, h: 210, unit: "万亿元", colors: ["#1f4e79", "#2a7f6f", "#c9a227", "#7a5c9e"] });
   return '' +
-  '<section class="hero"><h1>2024 年中国经济社会发展关键数字</h1>' +
-  '<p>国家统计局 2025 年 2 月 28 日发布《中华人民共和国 2024 年国民经济和社会发展统计公报》——本站把公报里的关键数字做成可查、可比的图表。</p></section>' +
+  '<section class="card hero-chart"><div class="hero-chart-top"><div>' +
+  '<div class="hero-kicker">2024 年 · 国家统计局统计公报</div>' +
+  '<div class="hero-big">134.91<span class="hero-unit"> 万亿元</span></div>' +
+  '<div class="hero-sub">国内生产总值 · 同比 +5.0% · 人均 GDP 95,749 元</div></div>' +
+  '<div class="hero-side"><b>十年增长约 96%</b><span>2015 年 68.89 万亿元 → 2024 年 134.91 万亿元</span></div></div>' +
+  '<h2>国内生产总值十年走势</h2>' + line +
+  '<p class="card-note">2015–2024 年，单位万亿元。2024 年 GDP 比上年增长 5.0%，人均 GDP 95,749 元。</p><a class="more" href="#/economy">看经济详情 →</a></section>' +
   '<div class="kpi-grid">' +
     kpiCard("国内生产总值", "134.91 万亿元", "同比增长 +5.0%", "2024 年 · 国家统计局") +
     kpiCard("年末总人口", "14.08 亿", "城镇化率 67.0%", "2024 年末 · 国家统计局") +
@@ -35,21 +40,18 @@ function viewOverview() {
     kpiCard("货物进出口总额", "43.85 万亿元", "同比增长 +5.0%", "2024 年 · 国家统计局") +
   '</div>' +
   '<div class="grid-2">' +
-    '<div class="card"><h2>国内生产总值十年走势</h2>' + line + '<p class="card-note">2015–2024 年，单位万亿元。2024 年 GDP 比上年增长 5.0%，人均 GDP 95,749 元。</p><a class="more" href="#/economy">看经济详情 →</a></div>' +
     '<div class="card"><h2>三次产业结构 · 2024 年</h2><div class="donut-wrap">' + donut + '<div class="legend">' + legendRow(g.industries.map(function (d) { return { name: d.name, share: d.share }; }), ["#c8402a", "#1f4e79", "#2a7f6f"]) + '</div></div>' +
     '<table class="mini-table"><tr><th>产业</th><th>增加值</th><th>占比</th><th>增速</th></tr>' +
     g.industries.map(function (d) { return "<tr><td>" + d.name + "</td><td>" + d.value + " 万亿元</td><td>" + d.share + "%</td><td>+" + d.growth + "%</td></tr>"; }).join("") + '</table></div>' +
-  '</div>' +
-  '<div class="grid-2">' +
     '<div class="card"><h2>四大地区生产总值 · 2024 年</h2>' + regionBars + '<p class="card-note">东部 70.24、中部 28.72、西部 28.74、东北 6.35 万亿元。</p><a class="more" href="#/regions">看地区对比 →</a></div>' +
-    '<div class="card"><h2>物价与民生速览</h2><ul class="fact-list">' +
+  '</div>' +
+  '<div class="card"><h2>物价与民生速览</h2><ul class="fact-list fact-cols">' +
     '<li><b>居民消费价格 CPI</b><span>2024 年上涨 0.2%，核心 CPI 上涨 0.5%</span></li>' +
     '<li><b>工业生产者出厂价 PPI</b><span>2024 年下降 2.2%</span></li>' +
     '<li><b>城镇新增就业</b><span>1,256 万人，城镇调查失业率平均 5.1%</span></li>' +
     '<li><b>人均消费支出</b><span>28,227 元，恩格尔系数 29.8%</span></li>' +
     '<li><b>出生人口</b><span>954 万人，自然增长率 -0.99‰</span></li></ul>' +
     '<div class="link-row"><a href="#/prices">物价 →</a><a href="#/income">就业与收入 →</a><a href="#/population">人口 →</a><a href="#/trade">贸易 →</a></div></div>' +
-  '</div>' +
   srcNote(STATS.meta.source + "；金额为当年价格，增速为不变价格同比。本站为独立制作的数据展示站，与国家统计局官网无关。");
 }
 
